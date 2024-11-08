@@ -84,10 +84,9 @@ def histogram(column, width, height, key):
 
     st.plotly_chart(histogram_chart, use_container_width=True, key=f"histogram_{key}")
 
-def scatter_plot(column, width, height, key):
-
+def scatter_plot(x_column, y_column, width, height, key):
     # Generate a scatter plot
-    scatter_plot = px.scatter(phonesearch_df, x=phonesearch_df['product_price'], y=phonesearch_df[product_star_rating])
+    scatter_plot = px.scatter(phonesearch_df, x=phonesearch_df[x_column], y=phonesearch_df[y_column])
 
     # Adjust the height and width
     scatter_plot.update_layout(
@@ -96,7 +95,6 @@ def scatter_plot(column, width, height, key):
     )
 
     st.plotly_chart(scatter_plot, use_container_width=True, key=f"scatter_plot_{key}")
-
 def pairwise_scatter_plot(key):
     # Generate a pairwise scatter plot matrix
     scatter_matrix = px.scatter_matrix(
@@ -203,7 +201,7 @@ elif st.session_state.page_selection == "eda":
 
     with col[1]:
         st.markdown('#### Product prices vs. Star Ratings')
-        scatter_plot("prices_ratings", 800, 600, 1)
+        scatter_plot('product_price', 'product_star_rating', 500, 500, =1)
         st.markdown('#### Pairwise Scatter Plot Matrix')
         pairwise_scatter_plot(1)
         
