@@ -98,6 +98,10 @@ elif st.session_state.page_selection == "dataset":
  # Display the dataset
     st.subheader("Dataset displayed as a Data Frame")
     st.dataframe(phonesearch_df, use_container_width=True, hide_index=True)
+    
+# Describe Statistics
+    st.subheader("Descriptive Statistics")
+    st.dataframe(phonesearch_df.describe(), use_container_width=True)
 
    
     
