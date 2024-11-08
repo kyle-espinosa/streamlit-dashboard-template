@@ -98,18 +98,13 @@ def scatter_plot(column, width, height, key):
 
     st.plotly_chart(scatter_plot, use_container_width=True, key=f"scatter_plot_{key}")
 
-def display_pairplot(df, columns):
-    # Create a Seaborn pairplot with the specified columns
-    pairplot_fig = sns.pairplot(df[columns])
-    
-    # Show the pairplot in Streamlit
-    st.pyplot(pairplot_fig)
-
-# Select the columns you want to include in the pairplot
-columns_to_plot = ['product_price', 'product_star_rating', 'product_original_price']
-
-# Call the function and pass the DataFrame and selected columns
-display_pairplot(phoneData_df, columns_to_plot)
+def pairwise_scatter_plot(key):
+    # Generate a pairwise scatter plot matrix
+    scatter_matrix = px.scatter_matrix(
+        phoneData_df,
+        dimensions=['product_price', 'product_star_rating', 'product_original_price'],  # Choose relevant numeric columns
+        color='is_prime'  # Replace with a categorical column if applicable
+    )
 
     # Adjust the layout
     scatter_matrix.update_layout(
@@ -211,7 +206,7 @@ elif st.session_state.page_selection == "eda":
         st.markdown('#### Product prices vs. Star Ratings')
         scatter_plot("prices_ratings", 800, 600, 1)
         st.markdown('#### Pairwise Scatter Plot Matrix')
-        display_pairplot(1)
+        pairwise_scatter_plot(1)
         
     with col[2]:
         st.markdown('#### Graphs Column 3')
