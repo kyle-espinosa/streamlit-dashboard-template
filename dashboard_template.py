@@ -196,7 +196,7 @@ elif st.session_state.page_selection == "eda":
                 ''')
 
         st.markdown('#### Price Distribution')
-        histogram("product_price", 800,500,1)
+        histogram("product_price", 800,600,1)
 
     with col[1]:
         st.markdown('#### Graphs Column 2')
