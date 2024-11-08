@@ -131,7 +131,7 @@ elif st.session_state.page_selection == "eda":
 
 
         st.markdown('#### Class Distribution')
-        histogram(")
+        histogram(phoneData_df['product_price'], kde=True, color='skyblue')
 
     with col[1]:
         st.markdown('#### Graphs Column 2')
