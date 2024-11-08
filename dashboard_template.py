@@ -123,17 +123,15 @@ elif st.session_state.page_selection == "eda":
 
         with st.expander('Legend', expanded=True):
             st.write('''
-                - Data: [Iris Flower Dataset](https://www.kaggle.com/datasets/arshid/iris-flower-dataset).
-                - :orange[**Pie Chart**]: Distribution of the 3 Iris species in the dataset.
-                - :orange[**Scatter Plots**]: Difference of Iris species' features.
-                - :orange[**Pairwise Scatter Plot Matrix**]: Highlighting *overlaps* and *differences* among Iris species' features.
+                - Data: [Phone Search Dataset](https://www.kaggle.com/datasets/shreyasur965/phone-search-dataset).
+                - :orange[**Histogram**]: Distribution of normalized product prices.
+                - :orange[**Scatter Plots**]: Product prices vs. Star Ratings.
+                - :orange[**Pairwise Scatter Plot Matrix**]: Highlighting *overlaps* and *differences* among Numerical features.
                 ''')
 
 
         st.markdown('#### Class Distribution')
         pie_chart("species", 500, 350, 1)
-
-
 
     with col[1]:
         st.markdown('#### Graphs Column 2')
