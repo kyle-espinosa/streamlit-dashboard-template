@@ -79,7 +79,7 @@ if st.session_state.page_selection == "about":
 elif st.session_state.page_selection == "dataset":
     st.header("📊 Dataset")
 
-    st.write("IRIS Flower Dataset")
+    st.write("Amazon Phone Data: Prices, Ratings & Sales Insight")
     st.write("")
 
     # Your content for your DATASET page goes here
