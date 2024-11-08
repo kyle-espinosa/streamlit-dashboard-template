@@ -1,9 +1,13 @@
 #######################
 # Import libraries
+
 import streamlit as st
 import pandas as pd
 import altair as alt
 import plotly.express as px
+import seaborn as sns
+import matplotlib.pyplot as plt
+
 
 #######################
 # Page configuration
@@ -84,7 +88,7 @@ def histogram(column, width, height, key):
 def scatter_plot(column, width, height, key):
 
     # Generate a scatter plot
-    scatter_plot = px.scatter(iris_df, x=iris_df['species'], y=iris_df[column])
+    scatter_plot = px.scatter(phonesearch_df, x=phonesearch_df['product_price'], y=phonesearch_df[product_star_rating])
 
     # Adjust the height and width
     scatter_plot.update_layout(
@@ -94,13 +98,18 @@ def scatter_plot(column, width, height, key):
 
     st.plotly_chart(scatter_plot, use_container_width=True, key=f"scatter_plot_{key}")
 
-def pairwise_scatter_plot(key):
-    # Generate a pairwise scatter plot matrix
-    scatter_matrix = px.scatter_matrix(
-        iris_df,
-        dimensions=iris_df.columns[:-1],  # Exclude the species column from dimensions
-        color='species',  # Color by species
-    )
+def display_pairplot(df, columns):
+    # Create a Seaborn pairplot with the specified columns
+    pairplot_fig = sns.pairplot(df[columns])
+    
+    # Show the pairplot in Streamlit
+    st.pyplot(pairplot_fig)
+
+# Select the columns you want to include in the pairplot
+columns_to_plot = ['product_price', 'product_star_rating', 'product_original_price']
+
+# Call the function and pass the DataFrame and selected columns
+display_pairplot(phoneData_df, columns_to_plot)
 
     # Adjust the layout
     scatter_matrix.update_layout(
@@ -199,8 +208,10 @@ elif st.session_state.page_selection == "eda":
         histogram("product_price", 800,600,1)
 
     with col[1]:
-        st.markdown('#### Graphs Column 2')
-        
+        st.markdown('#### Product prices vs. Star Ratings')
+        scatter_plot("prices_ratings", 800, 600, 1)
+        st.markdown('#### Pairwise Scatter Plot Matrix')
+        display_pairplot(1)
         
     with col[2]:
         st.markdown('#### Graphs Column 3')
