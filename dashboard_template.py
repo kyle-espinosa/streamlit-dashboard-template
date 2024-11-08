@@ -81,9 +81,7 @@ elif st.session_state.page_selection == "dataset":
     st.header("📊 Dataset")
 
     st.write("Amazon Phone Data: Prices, Ratings & Sales Insight")
-    st.write("Dataset The Amazon Phone Data dataset contains real-time information about 340 phone products available on Amazon. It includes prices, reviews, sales volume, and tags such as Best Seller and Amazon Choice. This data is useful for analyzing price trends, forecasting sales volume, and gaining insights into e-commerce.
-    For each product in the Amazon Phone Data dataset, several features are measured: asin (Amazon Standard Identification Number), product_title (name of the product), product_price (current price of the product), and product_star_rating (rating given to the product based on customer reviews). This dataset is useful for analyzing product performance, pricing strategies, and consumer preferences in e-commerce. The dataset was uploaded to Kaggle by the user shreyasur965.
-    Content The dataset has 340 rows containing attributes related to phone products on Amazon. The columns include information such as Price, Reviews, Sales Volume, and Tags (e.g., Best Seller, Amazon Choice). Link: https://www.kaggle.com/datasets/shreyasur965/phone-search-dataset")
+    st.write("MEH")
 
     # Your content for your DATASET page goes here
     
