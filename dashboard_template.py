@@ -98,7 +98,7 @@ def scatter_plot(x_column, y_column, width, height, key):
 def pairwise_scatter_plot(key):
     # Generate a pairwise scatter plot matrix
     scatter_matrix = px.scatter_matrix(
-        phoneData_df,
+        phonesearch_df,
         dimensions=['product_price', 'product_star_rating', 'product_original_price'],  # Choose relevant numeric columns
         color='is_prime'  # Replace with a categorical column if applicable
     )
