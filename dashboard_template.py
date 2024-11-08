@@ -125,6 +125,18 @@ elif st.session_state.page_selection == "eda":
     with col[0]:
         st.markdown('#### Graphs Column 1')
 
+        with st.expander('Legend', expanded=True):
+            st.write('''
+                - Data: [Phone Search Dataset](https://www.kaggle.com/datasets/shreyasur965/phone-search-dataset).
+                - :orange[**Histogram**]: Distribution of normalized product prices.
+                - :orange[**Scatter Plots**]: Product prices vs. Star Ratings.
+                - :orange[**Pairwise Scatter Plot Matrix**]: Highlighting *overlaps* and *differences* among Numerical features.
+                ''')
+
+
+        st.markdown('#### Class Distribution')
+        pie_chart("species", 500, 350, 1)
+
 
     with col[1]:
         st.markdown('#### Graphs Column 2')
