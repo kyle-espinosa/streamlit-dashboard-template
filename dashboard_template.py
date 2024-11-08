@@ -81,8 +81,9 @@ elif st.session_state.page_selection == "dataset":
     st.header("📊 Dataset")
 
     st.write("Amazon Phone Data: Prices, Ratings & Sales Insight")
-    st.write("MEH")
-
+    st.write("DATASET")
+    st.write("The Amazon Phone Data dataset contains real-time information about 340 phone products available on Amazon. It includes prices, reviews, sales volume, and tags such as Best Seller and Amazon Choice. This data is useful for analyzing price trends, forecasting sales volume, and gaining insights into e-commerce.")
+    st.write("...")
     # Your content for your DATASET page goes here
     
 
