@@ -63,7 +63,7 @@ with st.sidebar:
 # Data
 
 # Load data
-dataset = pd.read_csv("data/phone search.csv")
+phonesearch_df = pd.read_csv("data/phone search.csv")
 
 #######################
 
