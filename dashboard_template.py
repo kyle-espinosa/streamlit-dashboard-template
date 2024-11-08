@@ -131,7 +131,7 @@ elif st.session_state.page_selection == "eda":
 
 
         st.markdown('#### Class Distribution')
-        pie_chart("species", 500, 350, 1)
+        histogram("prices", 500, 350, 1)
 
     with col[1]:
         st.markdown('#### Graphs Column 2')
