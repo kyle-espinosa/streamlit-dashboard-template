@@ -63,7 +63,7 @@ with st.sidebar:
 # Data
 
 # Load data
-dataset = pd.read_csv("data/IRIS.csv")
+dataset = pd.read_csv("data/phone search.csv")
 
 #######################
 
@@ -80,6 +80,8 @@ if st.session_state.page_selection == "about":
 elif st.session_state.page_selection == "dataset":
     st.header("📊 Dataset")
 
+     # Your content for your DATASET page goes here
+
     st.markdown("""
 
     The **Amazon Phone Data dataset** contains real-time information about 340 phone products available on Amazon. It includes prices, reviews, sales volume, and tags such as Best Seller and Amazon Choice. This data is useful for analyzing price trends, forecasting sales volume, and gaining insights into e-commerce.
@@ -92,9 +94,12 @@ elif st.session_state.page_selection == "dataset":
     `Link:` https://www.kaggle.com/datasets/shreyasur965/phone-search-dataset          
                 
     """)
+    
+ # Display the dataset
+    st.subheader("Dataset displayed as a Data Frame")
+    st.dataframe(phone search_df, use_container_width=True, hide_index=True)
 
-
-    # Your content for your DATASET page goes here
+   
     
 
 # EDA Page
