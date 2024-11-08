@@ -195,12 +195,10 @@ elif st.session_state.page_selection == "eda":
                 - :orange[**Pairwise Scatter Plot Matrix**]: Highlighting *overlaps* and *differences* among Numerical features.
                 ''')
 
-
-        st.markdown('#### Class Distribution')
-        histogram("product_price", 800,600,1)
-
     with col[1]:
         st.markdown('#### Graphs Column 2')
+        st.markdown('#### Class Distribution')
+        histogram("product_price", 600,800,1)
         
     with col[2]:
         st.markdown('#### Graphs Column 3')
