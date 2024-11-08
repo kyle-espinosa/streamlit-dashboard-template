@@ -117,25 +117,22 @@ elif st.session_state.page_selection == "dataset":
 elif st.session_state.page_selection == "eda":
     st.header("📈 Exploratory Data Analysis (EDA)")
 
-
-    col = st.columns((1.5, 4.5, 2), gap='medium')
-
-    # Your content for the EDA page goes here
+    col = st.columns((3, 3, 3), gap='medium')
 
     with col[0]:
-        st.markdown('#### Graphs Column 1')
 
         with st.expander('Legend', expanded=True):
             st.write('''
-                - Data: [Phone Search Dataset](https://www.kaggle.com/datasets/shreyasur965/phone-search-dataset).
-                - :orange[**Histogram**]: Distribution of normalized product prices.
-                - :orange[**Scatter Plots**]: Product prices vs. Star Ratings.
-                - :orange[**Pairwise Scatter Plot Matrix**]: Highlighting *overlaps* and *differences* among Numerical features.
+                - Data: [Iris Flower Dataset](https://www.kaggle.com/datasets/arshid/iris-flower-dataset).
+                - :orange[**Pie Chart**]: Distribution of the 3 Iris species in the dataset.
+                - :orange[**Scatter Plots**]: Difference of Iris species' features.
+                - :orange[**Pairwise Scatter Plot Matrix**]: Highlighting *overlaps* and *differences* among Iris species' features.
                 ''')
 
 
         st.markdown('#### Class Distribution')
         pie_chart("species", 500, 350, 1)
+
 
 
     with col[1]:
