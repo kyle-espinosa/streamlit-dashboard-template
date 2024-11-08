@@ -201,7 +201,7 @@ elif st.session_state.page_selection == "eda":
 
     with col[1]:
         st.markdown('#### Product prices vs. Star Ratings')
-        scatter_plot('product_price', 'product_star_rating', 500, 500, =1)
+        scatter_plot('product_price', 'product_star_rating', 500, 500, 1)
         st.markdown('#### Pairwise Scatter Plot Matrix')
         pairwise_scatter_plot(1)
         
