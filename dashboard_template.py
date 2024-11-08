@@ -65,6 +65,72 @@ with st.sidebar:
 # Load data
 phonesearch_df = pd.read_csv("data/phone search.csv")
 
+# Plots
+
+# `key` parameter is used to update the plot when the page is refreshed
+
+def histogram(column, width, height, key):
+    # Generate a histogram
+    histogram_chart = px.histogram(phonesearch_df, x=column)
+
+    # Adjust the height and width
+    histogram_chart.update_layout(
+        width=width,   # Set the width
+        height=height  # Set the height
+    )
+
+    st.plotly_chart(histogram_chart, use_container_width=True, key=f"histogram_{key}")
+
+def scatter_plot(column, width, height, key):
+
+    # Generate a scatter plot
+    scatter_plot = px.scatter(iris_df, x=iris_df['species'], y=iris_df[column])
+
+    # Adjust the height and width
+    scatter_plot.update_layout(
+        width=width,  # Set the width
+        height=height  # Set the height
+    )
+
+    st.plotly_chart(scatter_plot, use_container_width=True, key=f"scatter_plot_{key}")
+
+def pairwise_scatter_plot(key):
+    # Generate a pairwise scatter plot matrix
+    scatter_matrix = px.scatter_matrix(
+        iris_df,
+        dimensions=iris_df.columns[:-1],  # Exclude the species column from dimensions
+        color='species',  # Color by species
+    )
+
+    # Adjust the layout
+    scatter_matrix.update_layout(
+        width=500,  # Set the width
+        height=500  # Set the height
+    )
+
+    st.plotly_chart(scatter_matrix, use_container_width=True, key=f"pairwise_scatter_plot_{key}")
+
+def feature_importance_plot(feature_importance_df, width, height, key):
+    # Generate a bar plot for feature importances
+    feature_importance_fig = px.bar(
+        feature_importance_df,
+        x='Importance',
+        y='Feature',
+        labels={'Importance': 'Importance Score', 'Feature': 'Feature'},
+        orientation='h'  # Horizontal bar plot
+    )
+
+    # Adjust the height and width
+    feature_importance_fig.update_layout(
+        width=width,  # Set the width
+        height=height  # Set the height
+    )
+
+    st.plotly_chart(feature_importance_fig, use_container_width=True, key=f"feature_importance_plot_{key}")
+
+
+# -------------------------
+
 #######################
 
 # Pages
@@ -131,7 +197,7 @@ elif st.session_state.page_selection == "eda":
 
 
         st.markdown('#### Class Distribution')
-        histogram(phoneData_df['product_price'], kde=True, color='skyblue')
+        histogram("product_price", 8,6,1)
 
     with col[1]:
         st.markdown('#### Graphs Column 2')
