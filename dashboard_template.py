@@ -5,7 +5,7 @@ import streamlit as st
 import pandas as pd
 import altair as alt
 import plotly.express as px
-
+from sklearn.preprocessing import LabelEncoder
 
 
 #######################
@@ -209,6 +209,21 @@ elif st.session_state.page_selection == "data_cleaning":
     st.header("🧼 Data Cleaning and Data Pre-processing")
 
     # Your content for the DATA CLEANING / PREPROCESSING page goes here
+    st.subheader("Sample of Encoded Data")
+    st.write(phoneData_df[['is_best_seller', 'is_best_seller_encoded', 'is_amazon_choice', 'is_amazon_choice_encoded']].head())
+
+    # Step 2: Show value counts for each encoded column
+    st.subheader("Value Counts of Encoded Columns")
+    best_seller_counts = phoneData_df['is_best_seller_encoded'].value_counts()
+    amazon_choice_counts = phoneData_df['is_amazon_choice_encoded'].value_counts()
+
+    st.write("**Best Seller Encoded Value Counts**")
+    st.bar_chart(best_seller_counts)
+
+    st.write("**Amazon Choice Encoded Value Counts**")
+    st.bar_chart(amazon_choice_counts)
+
+
 
 # Machine Learning Page
 elif st.session_state.page_selection == "machine_learning":
