@@ -8,6 +8,7 @@ import plotly.express as px
 from sklearn.preprocessing import LabelEncoder
 
 
+
 #######################
 # Page configuration
 st.set_page_config(
