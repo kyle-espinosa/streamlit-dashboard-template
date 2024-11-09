@@ -5,7 +5,10 @@ import streamlit as st
 import pandas as pd
 import altair as alt
 import plotly.express as px
+
+## 
 from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import train_test_split
 
 
 
@@ -272,9 +275,6 @@ elif st.session_state.page_selection == "machine_learning":
      
     """)
     
-    st.subheader("Classification Report")
-    classification_report_text = classification_report(y_test_class, y_pred_class)
-    st.text(classification_report_text)
 
 # Prediction Page
 elif st.session_state.page_selection == "prediction":
