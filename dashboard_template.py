@@ -123,31 +123,19 @@ def pairwise_scatter_plot(key):
 
 def confusion_matrix_plot(y_true, y_pred, labels, width, height, key):
     # Generate confusion matrix
-    cm = confusion_matrix(y_true, y_pred, labels=labels)
+    cm = confusion_matrix(y_true, y_pred)
     
-    # Create a dataframe from the confusion matrix for better visualization
-    cm_df = pd.DataFrame(cm, index=labels, columns=labels)
+    # Set up the plot
+    plt.figure(figsize=(width/100, height/100))  # Adjust figure size based on width and height
+    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=labels, yticklabels=labels)
     
-    # Create the heatmap
-    fig = ff.create_annotated_heatmap(
-        z=cm_df.values,
-        x=labels,
-        y=labels,
-        colorscale='Blues',
-        zmin=0, zmax=cm_df.values.max(), 
-        hoverinfo='z', text=cm_df.values
-    )
+    # Add labels and title
+    plt.xlabel("Predicted")
+    plt.ylabel("Actual")
+    plt.title("Confusion Matrix for Logistic Regression")
     
-    # Adjust the layout of the plot
-    fig.update_layout(
-        title="Confusion Matrix",
-        xaxis=dict(title='Predicted Label'),
-        yaxis=dict(title='True Label'),
-        width=width,
-        height=height
-    )
-    
-    st.plotly_chart(fig, use_container_width=True, key=f"confusion_matrix_{key}")
+    # Display
+    st.pyplot(plt, clear_figure=True)
 
 
 def feature_importance_plot(feature_importance_df, width, height, key):
@@ -473,7 +461,7 @@ elif st.session_state.page_selection == "machine_learning":
     st.text(f"\nClassification Report:\n{classification_report_text}")
  
     # Confusion Matrix Visualization
-    confusion_matrix_plot(y_true, y_pred, labels=['Class 0', 'Class 1'], width=600, height=600, key='example')
+    confusion_matrix_plot(y_test_class, y_pred_class, labels=['Not Amazon Choice', 'Amazon Choice'], width=600, height=600, key='example')
  
     st.subheader("Random Forest")
     st.markdown("""
