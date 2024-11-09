@@ -346,7 +346,8 @@ elif st.session_state.page_selection == "data_cleaning":
 
     # Save to session state 
     st.session_state['X_train_class'] = X_train_class
-    st.session_state['X_test_class'] = X_test_class    
+    st.session_state['X_test_class'] = X_test_class
+    st.session_state['y_train_class'] = y_train_class
     st.session_state['y_test_class'] = y_test_class 
     
  
@@ -385,14 +386,17 @@ elif st.session_state.page_selection == "machine_learning":
    `Reference:` https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html     
                 
     """)  
-   
+    # Access X and y data from session state
+    X_train_class = st.session_state['X_train_class']
+    X_test_class = st.session_state['X_test_class']
+    y_train_class = st.session_state['y_train_class']  
+    y_test_class = st.session_state['y_test_class']
+
     # Imputer for handling missing values
     st.write("Handling missing values using median imputation...")
  
     imputer = SimpleImputer(strategy="median")
-    # Access X Y
-    X_train_class = st.session_state['X_train_class']
-    X_test_class = st.session_state['X_test_class']
+
     # Apply the imputer to X_train_class and X_test_class
     X_train_class = imputer.fit_transform(X_train_class)
     X_test_class = imputer.transform(X_test_class)
@@ -434,7 +438,6 @@ elif st.session_state.page_selection == "machine_learning":
     """)
 
     st.subheader("Classification Report")
-    y_test_class = st.session_state['y_test_class']
     classification_report_text = classification_report(y_test_class, y_pred_class)
    
     # Display the classification report 
