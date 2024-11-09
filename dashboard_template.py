@@ -349,8 +349,7 @@ elif st.session_state.page_selection == "data_cleaning":
     st.session_state['X_test_class'] = X_test_class
     st.session_state['y_train_class'] = y_train_class
     st.session_state['y_test_class'] = y_test_class 
-    
- 
+     
     # 4 Select features and target variable for regression
     st.subheader("Regression Task")
     X_regression = phonesearch_df[['product_price', 'product_star_rating', 'product_num_ratings']]
@@ -385,16 +384,13 @@ elif st.session_state.page_selection == "machine_learning":
 
    `Reference:` https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html     
                 
-    """)  
-    
-    
+    """)      
 
     # Imputer for handling missing values
     st.write("Handling missing values using median imputation...")
     
     imputer = SimpleImputer(strategy="median")
 
-    
     # Access X and y data from session state
     X_train_class = st.session_state['X_train_class']
     X_test_class = st.session_state['X_test_class']
