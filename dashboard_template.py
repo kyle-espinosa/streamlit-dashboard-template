@@ -209,11 +209,14 @@ elif st.session_state.page_selection == "eda":
 elif st.session_state.page_selection == "data_cleaning":
     st.header("🧼 Data Cleaning and Data Pre-processing")
 
-    # Your content for the DATA CLEANING / PREPROCESSING page goes here
+    phonesearch_df['is_best_seller_encoded'] = phonesearch_df['is_best_seller'].astype('category').cat.codes
+    phonesearch_df['is_amazon_choice_encoded'] = phonesearch_df['is_amazon_choice'].astype('category').cat.codes
+
+    # Display a sample of the DataFrame with the new encoded columns
     st.subheader("Sample of Encoded Data")
     st.write(phonesearch_df[['is_best_seller', 'is_best_seller_encoded', 'is_amazon_choice', 'is_amazon_choice_encoded']].head())
 
-    # Step 2: Show value counts for each encoded column
+    # Show value counts for each encoded column
     st.subheader("Value Counts of Encoded Columns")
     best_seller_counts = phonesearch_df['is_best_seller_encoded'].value_counts()
     amazon_choice_counts = phonesearch_df['is_amazon_choice_encoded'].value_counts()
@@ -223,6 +226,7 @@ elif st.session_state.page_selection == "data_cleaning":
 
     st.write("**Amazon Choice Encoded Value Counts**")
     st.bar_chart(amazon_choice_counts)
+
 
 
 
