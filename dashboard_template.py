@@ -301,7 +301,14 @@ elif st.session_state.page_selection == "machine_learning":
     `Reference:`  https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html         
                 
     """)    
+    st.subheader("Training the Logistic Regression model")
 
+    st.code("""
+
+    log_reg_model = LogisticRegression(random_state=42, max_iter=1000)
+    log_reg_model.fit(X_train_class, y_train_class)     
+            
+    """)
     st.subheader("Model Evaluation")
 
     st.code("""
@@ -321,7 +328,58 @@ elif st.session_state.page_selection == "machine_learning":
     """)
 
     st.subheader("Classification Report")
-   
+ 
+    st.subheader("Random Forest")
+    st.markdown("""
+
+    **Random Forest Regressor** is a machine learning algorithm that is used to predict continuous values by *combining multiple decision trees* which is called `"Forest"` wherein each tree is trained independently on different random subset of data and features.
+
+    This process begins with data **splitting** wherein the algorithm selects various random subsets of both the data points and the features to create diverse decision trees.  
+
+    Each tree is then trained separately to make predictions based on its unique subset. When it's time to make a final prediction each tree in the forest gives its own result and the Random Forest algorithm averages these predictions.
+
+    `Reference:` https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html         
+                
+    """)  
+
+    st.subheader("Training the Random Forest Regressor model")
+
+    st.code("""
+
+    rfr_model = RandomForestRegressor(random_state=42)
+    rfr_model.fit(X_train_reg, y_train_reg)   
+            
+    """)
+
+    st.subheader("Model Evaluation")
+
+    st.code("""
+
+    # Apply the extract_numeric function to clean y_test_reg
+    y_test_reg = y_test_reg.apply(extract_numeric)
+
+    # Fill any remaining NaN values in y_test_reg with the median
+    y_test_reg = y_test_reg.fillna(y_test_reg.median())
+
+    # Evaluate the model
+    train_accuracy_reg = rfr_model.score(X_train_reg, y_train_reg)  # Train data
+    test_accuracy_reg = rfr_model.score(X_test_reg, y_test_reg)      # Test data
+
+    print(f'Train R^2 Score: {train_accuracy_reg * 100:.2f}%')
+    print(f'Test R^2 Score: {test_accuracy_reg * 100:.2f}%')
+    
+            
+    """)
+
+    st.write("Train R\u00b2 Score: 85.13%")
+    st.write("Test R\u00b2 Score: 4.46%")
+
+    
+    st.markdown("""
+
+    The Random Forest Regressor was trained to predict sales volume. An R² score of X% indicates how well the model explains the variance in sales volume, suggesting that the features used are relevant predictors.
+     
+    """)
 
     
     
