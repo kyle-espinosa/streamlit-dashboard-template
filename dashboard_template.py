@@ -317,7 +317,11 @@ elif st.session_state.page_selection == "machine_learning":
     """)
 
     st.subheader("Classification Report")
-    st.text(f"\nClassification Report:\n{classification_report_text}")
+    classification_rep = classification_report(y_test_class, y_pred_class)
+
+    # Display 
+    st.subheader("Classification Report")
+    st.text(classification_rep)
     
     
 
