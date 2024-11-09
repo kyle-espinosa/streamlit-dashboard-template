@@ -211,12 +211,12 @@ elif st.session_state.page_selection == "data_cleaning":
 
     # Your content for the DATA CLEANING / PREPROCESSING page goes here
     st.subheader("Sample of Encoded Data")
-    st.write(phoneData_df[['is_best_seller', 'is_best_seller_encoded', 'is_amazon_choice', 'is_amazon_choice_encoded']].head())
+    st.write(phonesearch_df[['is_best_seller', 'is_best_seller_encoded', 'is_amazon_choice', 'is_amazon_choice_encoded']].head())
 
     # Step 2: Show value counts for each encoded column
     st.subheader("Value Counts of Encoded Columns")
-    best_seller_counts = phoneData_df['is_best_seller_encoded'].value_counts()
-    amazon_choice_counts = phoneData_df['is_amazon_choice_encoded'].value_counts()
+    best_seller_counts = phonesearch_df['is_best_seller_encoded'].value_counts()
+    amazon_choice_counts = phonesearch_df['is_amazon_choice_encoded'].value_counts()
 
     st.write("**Best Seller Encoded Value Counts**")
     st.bar_chart(best_seller_counts)
