@@ -443,6 +443,20 @@ elif st.session_state.page_selection == "machine_learning":
     # Display the classification report 
     st.text(f"\nClassification Report:\n{classification_report_text}")
  
+    # Confusion Matrix Visualization
+    st.subheader("Confusion Matrix")
+    conf_matrix = confusion_matrix(y_test_class, y_pred_class)
+    
+    # Plot confusion matrix using seaborn heatmap
+    fig, ax = plt.subplots(figsize=(6, 4))
+    sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues', xticklabels=['Not Amazon Choice', 'Amazon Choice'], yticklabels=['Not Amazon Choice', 'Amazon Choice'])
+    plt.xlabel("Predicted")
+    plt.ylabel("Actual")
+    plt.title("Confusion Matrix for Logistic Regression")
+    
+    # Show the plot in Streamlit
+    st.pyplot(fig)
+ 
     st.subheader("Random Forest")
     st.markdown("""
 
