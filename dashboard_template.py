@@ -347,6 +347,8 @@ elif st.session_state.page_selection == "data_cleaning":
     # Save to session state 
     st.session_state['X_train_class'] = X_train_class
     st.session_state['X_test_class'] = X_test_class    
+    st.session_state['y_test_class'] = y_test_class 
+    
  
     # 4 Select features and target variable for regression
     st.subheader("Regression Task")
@@ -432,6 +434,7 @@ elif st.session_state.page_selection == "machine_learning":
     """)
 
     st.subheader("Classification Report")
+    y_test_class = st.session_state['y_test_class']
     classification_report_text = classification_report(y_test_class, y_pred_class)
    
     # Display the classification report 
