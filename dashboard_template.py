@@ -5,13 +5,14 @@ import streamlit as st
 import pandas as pd
 import altair as alt
 import plotly.express as px
+import seaborn as sns
 
 ## 
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import classification_report
-
-
+from sklearn.impute import SimpleImputer
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
 #######################
 # Page configuration
@@ -322,6 +323,8 @@ elif st.session_state.page_selection == "machine_learning":
     # Display 
     st.subheader("Classification Report")
     st.text(classification_rep)
+
+    
     
     
 
