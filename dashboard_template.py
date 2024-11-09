@@ -333,9 +333,7 @@ elif st.session_state.page_selection == "data_cleaning":
     with col2:
         st.write("Target Variable for Classification:")
         st.write(y_classification.head())
-    # Define x y 
-    X_classification = phonesearch_df.drop(columns=['product_price', 'product_star_rating', 'product_num_ratings'])  
-    y_classification = phonesearch_df['is_amazon_choice_encoded']
+    
     # 3 Split the dataset into training and testing sets for classification
     st.subheader("Classification Data Split")
     X_train_class, X_test_class, y_train_class, y_test_class = train_test_split(X_classification, y_classification, test_size=0.3, random_state=42)
