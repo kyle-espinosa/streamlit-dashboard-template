@@ -336,7 +336,7 @@ elif st.session_state.page_selection == "data_cleaning":
     
     # 3 Split the dataset into training and testing sets for classification
     st.subheader("Classification Data Split")
-     X_train_class, X_test_class, y_train_class, y_test_class = train_test_split(X_classification, y_classification, test_size=0.3, random_state=42)
+    X_train_class, X_test_class, y_train_class, y_test_class = train_test_split(X_classification, y_classification, test_size=0.3, random_state=42)
     
     # Display 
     st.write("Shape of the Training Set for Classification:")
@@ -388,7 +388,7 @@ elif st.session_state.page_selection == "machine_learning":
     # Apply the imputer to X_train_class and X_test_class
     X_train_class = imputer.fit_transform(X_train_class)
     X_test_class = imputer.transform(X_test_class)
-    
+
     st.write("Imputation Complete!")
     
 
