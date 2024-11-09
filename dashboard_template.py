@@ -9,6 +9,7 @@ import plotly.express as px
 ## 
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report
 
 
 
@@ -314,6 +315,10 @@ elif st.session_state.page_selection == "machine_learning":
     This implements Logistic Regression for classification. It first imputes any remaining missing values in the training and test datasets using the median. The model is then fitted on the training data, predictions are made on the test set, and the accuracy of the model is calculated and printed.
      
     """)
+
+    st.subheader("Classification Report")
+    st.text(f"\nClassification Report:\n{classification_report_text}")
+    
     
 
 # Prediction Page
