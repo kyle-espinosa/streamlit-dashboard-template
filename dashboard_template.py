@@ -228,10 +228,14 @@ elif st.session_state.page_selection == "data_cleaning":
     st.write("Encoded Data (After Label Encoding):")
     st.write(phonesearch_df[['is_best_seller', 'is_best_seller_encoded', 'is_amazon_choice', 'is_amazon_choice_encoded']].head())
 
+    #Classification
+    col = st.columns((2), gap='medium')
+
+    with col[0]:
     st.subheader("Classification Task")
     X_classification = phonesearch_df[['product_price', 'product_star_rating', 'product_num_ratings']]
     y_classification = phonesearch_df['is_amazon_choice_encoded']
-
+    with col[1]:
     # Display the selected features and target variable for classification
     st.write("Selected Features for Classification:")
     st.write(X_classification.head())
