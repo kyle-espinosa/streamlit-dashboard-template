@@ -549,7 +549,7 @@ elif st.session_state.page_selection == "machine_learning":
     """)
 
     # Feature Importance
-    feature_importance = pd.Series(rfr_model.feature_importances_, index=X_train.columns)
+    feature_importance = pd.Series(rfr_model.feature_importances_, index=X_train_reg.columns)
     
     # Display Feature Importance
     st.subheader("Feature Importance")
