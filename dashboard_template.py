@@ -184,20 +184,23 @@ elif st.session_state.page_selection == "dataset":
 elif st.session_state.page_selection == "eda":
     st.header("📈 Exploratory Data Analysis (EDA)")
 
-        st.expander('Legend', expanded=True):
-            st.write('''
-                - Data: [Phone Search Dataset](https://www.kaggle.com/datasets/shreyasur965/phone-search-dataset).
-                - :orange[**Histogram**]: Distribution of normalized product prices.
-                - :orange[**Scatter Plots**]: Product prices vs. Star Ratings.
-                - :orange[**Pairwise Scatter Plot Matrix**]: Highlighting *overlaps* and *differences* among Numerical features.
-                ''')
+    with st.expander('Legend', expanded=True):
+        st.write('''
+            - Data: [Phone Search Dataset](https://www.kaggle.com/datasets/shreyasur965/phone-search-dataset).
+            - :orange[**Histogram**]: Distribution of normalized product prices.
+            - :orange[**Scatter Plots**]: Product prices vs. Star Ratings.
+            - :orange[**Pairwise Scatter Plot Matrix**]: Highlighting *overlaps* and *differences* among Numerical features.
+        ''')
 
-        st.markdown('#### Price Distribution')
-        histogram("product_price", 800,600,1)
-        st.markdown('#### Product prices vs. Star Ratings')
-        scatter_plot('product_price', 'product_star_rating', 500, 500, 1)
-        st.markdown('#### Pairwise Scatter Plot Matrix')
-        pairwise_scatter_plot(1)
+    st.markdown('#### Price Distribution')
+    histogram("product_price", 800, 600, 1)
+    
+    st.markdown('#### Product prices vs. Star Ratings')
+    scatter_plot('product_price', 'product_star_rating', 500, 500, 1)
+    
+    st.markdown('#### Pairwise Scatter Plot Matrix')
+    pairwise_scatter_plot(1)
+
         
     col = st.columns((2), gap='medium')
 
