@@ -294,11 +294,11 @@ elif st.session_state.page_selection == "machine_learning":
     st.subheader("Logistic Regression")
     st.markdown("""
 
-    **Logistic Regression** is a statistical method used for binary classification problems, where the goal is to predict the probability that a given input point belongs to a particular category. Unlike linear regression, which predicts continuous values, logistic regression uses the logistic function to model a binary outcome.
+    **Logistic Regression** is a `statistical` method used for binary classification problems, where the goal is to predict the probability that a given input point belongs to a particular category. Unlike linear regression, which predicts continuous values, logistic regression uses the logistic function to model a binary outcome.
 
     The predicted probabilities are then converted into class labels (typically 0 or 1) by applying a threshold. Commonly, a threshold of 0.5 is used, where probabilities above this threshold are classified as 1 (positive class) and those below as 0 (negative class).
 
-    `Reference:`  https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html         
+   `Reference:` https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html     
                 
     """)    
     st.subheader("Training the Logistic Regression model")
