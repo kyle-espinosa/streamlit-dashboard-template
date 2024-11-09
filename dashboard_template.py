@@ -539,15 +539,19 @@ elif st.session_state.page_selection == "machine_learning":
     """)
     st.write('Train R\u00b2 Score: 85.13%')
     st.write('Test R\u00b2 Score: 4.46%')
- 
 
-
-    
     st.markdown("""
 
     The Random Forest Regressor was trained to predict sales volume. An R² score of X% indicates how well the model explains the variance in sales volume, suggesting that the features used are relevant predictors.
      
     """)
+
+    # Feature Importance
+    feature_importance = pd.Series(rfr_model.feature_importances_, index=X_train.columns)
+    
+    # Display Feature Importance
+    st.subheader("Feature Importance")
+    st.bar_chart(feature_importance)
 
 
     
