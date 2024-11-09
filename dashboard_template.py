@@ -121,21 +121,38 @@ def pairwise_scatter_plot(key):
 
     st.plotly_chart(scatter_matrix, use_container_width=True, key=f"pairwise_scatter_plot_{key}")
 
-def confusion_matrix_plot(y_true, y_pred, labels, width, height, key):
-    # Generate confusion matrix
-    cm = confusion_matrix(y_true, y_pred)
-    
-    # Set up the plot
-    plt.figure(figsize=(width/100, height/100))  # Adjust figure size based on width and height
-    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=labels, yticklabels=labels)
-    
-    # Add labels and title
-    plt.xlabel("Predicted")
-    plt.ylabel("Actual")
-    plt.title("Confusion Matrix for Logistic Regression")
-    
+def plot_confusion_matrix(y_true, y_pred, title="Confusion Matrix", key="conf_matrix"):
+    """
+    Function to plot a confusion matrix using Plotly.
+
+    Parameters:
+    y_true (list or array): True labels
+    y_pred (list or array): Predicted labels
+    title (str): Title of the confusion matrix plot
+    key (str): Unique key for Streamlit's use_container_width functionality
+    """
+    # Generate the confusion matrix
+    conf_matrix = confusion_matrix(y_true, y_pred)
+
+    # Create a DataFrame for easier plotting
+    conf_matrix_df = pd.DataFrame(conf_matrix, 
+                                  index=['Not Amazon Choice', 'Amazon Choice'], 
+                                  columns=['Not Amazon Choice', 'Amazon Choice'])
+
+    # Create a heatmap using Plotly
+    fig = px.imshow(conf_matrix_df, 
+                    text_auto=True, 
+                    labels={'x': 'Predicted', 'y': 'Actual'}, 
+                    title=title)
+
+    # Adjust the layout
+    fig.update_layout(
+        width=600,  # Width of the plot
+        height=500,  # Height of the plot
+    )
+
     # Display
-    st.pyplot(plt, clear_figure=True)
+    st.plotly_chart(fig, use_container_width=True, key=key)
 
 
 def feature_importance_plot(feature_importance_df, width, height, key):
@@ -461,7 +478,8 @@ elif st.session_state.page_selection == "machine_learning":
     st.text(f"\nClassification Report:\n{classification_report_text}")
  
     # Confusion Matrix Visualization
-    confusion_matrix_plot(y_test_class, y_pred_class, labels=['Not Amazon Choice', 'Amazon Choice'], width=600, height=600, key='example')
+    plot_confusion_matrix(y_test_class, y_pred_class, title="Logistic Regression Confusion Matrix")
+
  
     st.subheader("Random Forest")
     st.markdown("""
