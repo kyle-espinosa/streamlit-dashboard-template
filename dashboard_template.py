@@ -510,7 +510,8 @@ elif st.session_state.page_selection == "machine_learning":
 
 
     st.subheader("Training the Random Forest Regressor model")
-
+    rfr_model = RandomForestRegressor(random_state=42)  # Model definition
+    rfr_model.fit(X_train, y_train)
     st.code("""
 
     rfr_model = RandomForestRegressor(random_state=42)
@@ -521,7 +522,8 @@ elif st.session_state.page_selection == "machine_learning":
     st.subheader("Model Evaluation")
 
     st.code("""
-
+    train_accuracy = rfr_model.score(X_train, y_train)  # Train data R^2 score
+    test_accuracy = rfr_model.score(X_test, y_test)    # Test data R^2 score
     # Apply the extract_numeric function to clean y_test_reg
     y_test_reg = y_test_reg.apply(extract_numeric)
 
