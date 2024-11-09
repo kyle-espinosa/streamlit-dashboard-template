@@ -288,23 +288,7 @@ elif st.session_state.page_selection == "machine_learning":
 
     `Reference:`  https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html         
                 
-    """)
-    # Imputer for handling missing values
-    st.write("Handling missing values using median imputation...")
-    
-    imputer = SimpleImputer(strategy="median")
-    
-    # Apply the imputer to X_train_class and X_test_class
-    X_train_class = imputer.fit_transform(X_train_class)
-    X_test_class = imputer.transform(X_test_class)
-    
-    st.write("Imputation Complete!")
-    
-    # Step 2: Train the Logistic Regression Model
-    st.subheader("Training the Logistic Regression Model")
-    
-    log_reg_model = LogisticRegression(random_state=42, max_iter=1000)
-    log_reg_model.fit(X_train_class, y_train_class)
+    """)    
 
     st.subheader("Model Evaluation")
 
@@ -325,11 +309,7 @@ elif st.session_state.page_selection == "machine_learning":
     """)
 
     st.subheader("Classification Report")
-    classification_rep = classification_report(y_test_class, y_pred_class)
-
-    # Display 
-    st.subheader("Classification Report")
-    st.text(classification_rep)
+   
 
     
     
