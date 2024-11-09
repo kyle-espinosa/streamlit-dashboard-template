@@ -184,11 +184,7 @@ elif st.session_state.page_selection == "dataset":
 elif st.session_state.page_selection == "eda":
     st.header("📈 Exploratory Data Analysis (EDA)")
 
-    col = st.columns((2), gap='medium')
-
-    with col[0]:
-
-        with st.expander('Legend', expanded=True):
+        st.expander('Legend', expanded=True):
             st.write('''
                 - Data: [Phone Search Dataset](https://www.kaggle.com/datasets/shreyasur965/phone-search-dataset).
                 - :orange[**Histogram**]: Distribution of normalized product prices.
@@ -198,15 +194,14 @@ elif st.session_state.page_selection == "eda":
 
         st.markdown('#### Price Distribution')
         histogram("product_price", 800,600,1)
-
-    with col[1]:
         st.markdown('#### Product prices vs. Star Ratings')
         scatter_plot('product_price', 'product_star_rating', 500, 500, 1)
         st.markdown('#### Pairwise Scatter Plot Matrix')
         pairwise_scatter_plot(1)
         
-    with col[2]:
-        st.markdown('#### Graphs Column 3')
+    col = st.columns((2), gap='medium')
+
+        with col[0]:
 
 # Data Cleaning Page
 elif st.session_state.page_selection == "data_cleaning":
