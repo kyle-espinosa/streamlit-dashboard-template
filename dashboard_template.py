@@ -245,6 +245,27 @@ elif st.session_state.page_selection == "machine_learning":
                 
     """)
     
+    st.subheader("Training the Logistic Regression model")
+
+    st.code("""
+
+    log_reg_model = LogisticRegression(random_state=42, max_iter=1000)
+    log_reg_model.fit(X_train_class, y_train_class)  
+            
+    """)
+
+    st.subheader("Model Evaluation")
+
+    st.code("""
+
+    y_pred_class = log_reg_model.predict(X_test_class)
+    accuracy_class = accuracy_score(y_test_class, y_pred_class)
+    print(f'Accuracy of Logistic Regression Classifier: {accuracy_class * 100:.2f}%')
+            
+    """)
+
+    st.write("Accuracy: 98.95%")
+    
 
 # Prediction Page
 elif st.session_state.page_selection == "prediction":
