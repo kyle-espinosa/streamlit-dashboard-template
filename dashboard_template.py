@@ -409,10 +409,10 @@ elif st.session_state.page_selection == "data_cleaning":
     st.write(X_test_reg.shape)
 
     # Save the training and testing datasets to session state
-    st.session_state['X_train_reg_rf'] = X_train_reg_rf
-    st.session_state['X_test_reg_rf'] = X_test_reg_rf
-    st.session_state['y_train_reg_rf'] = y_train_reg_rf
-    st.session_state['y_test_reg_rf'] = y_test_reg_rf
+    st.session_state['X_train_reg'] = X_train_reg
+    st.session_state['X_test_reg'] = X_test_reg
+    st.session_state['y_train_reg'] = y_train_reg
+    st.session_state['y_test_reg'] = y_test_reg
 
 # Machine Learning Page
 elif st.session_state.page_selection == "machine_learning":
@@ -503,10 +503,10 @@ elif st.session_state.page_selection == "machine_learning":
                 
     """) 
     # Access X and y data for Random Forest regression from session state
-    X_train_reg_rf = st.session_state['X_train_reg_rf']
-    X_test_reg_rf = st.session_state['X_test_reg_rf']
-    y_train_reg_rf = st.session_state['y_train_reg_rf']
-    y_test_reg_rf = st.session_state['y_test_reg_rf']
+    X_train_reg = st.session_state['X_train_reg']
+    X_test_reg = st.session_state['X_test_reg']
+    y_train_reg = st.session_state['y_train_reg']
+    y_test_reg = st.session_state['y_test_reg']
 
     # 1. Data Preprocessing for y_train_reg and y_test_reg
     def extract_numeric(value):
