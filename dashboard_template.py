@@ -215,8 +215,8 @@ elif st.session_state.page_selection == "data_cleaning":
     st.subheader("Original Dataset Preview")
     st.write("Preview of the original dataset before encoding:")
     st.write(phonesearch_df.head())  # Display the first 5 rows
-
-    # Encoding categorical variables
+    
+    # 1 Encoding categorical variables
     st.subheader("Encoding Categorical Variables")
 
     # Applying Label Encoding
@@ -228,7 +228,7 @@ elif st.session_state.page_selection == "data_cleaning":
     st.write("Encoded Data (After Label Encoding):")
     st.write(phonesearch_df[['is_best_seller', 'is_best_seller_encoded', 'is_amazon_choice', 'is_amazon_choice_encoded']].head())
 
-    # Classification
+    # 2 Select features and target variable for classification
     st.subheader("Classification Task")
     col1, col2 = st.columns(2, gap='medium')  
     with col1:       
@@ -240,6 +240,16 @@ elif st.session_state.page_selection == "data_cleaning":
     with col2:
         st.write("Target Variable for Classification:")
         st.write(y_classification.head())
+
+    # 3 Split the dataset into training and testing sets for classification
+    st.subheader("Classification Data Split")
+    X_train_class, X_test_class, y_train_class, y_test_class = train_test_split(X_classification, y_classification, test_size=0.3, random_state=42)
+    
+    # Display 
+    st.write("Shape of the Training Set for Classification:")
+    st.write(X_train_class.shape)
+    st.write("Shape of the Test Set for Classification:")
+    st.write(X_test_class.shape)
 
 
 
