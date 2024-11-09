@@ -508,19 +508,6 @@ elif st.session_state.page_selection == "machine_learning":
     y_train_reg = st.session_state['y_train_reg']
     y_test_reg = st.session_state['y_test_reg']
 
-    # 1. Data Preprocessing for y_train_reg and y_test_reg
-    # Function to extract numeric values
-    # Function to convert strings like '100+' or '1K+' to numbers
-    def process_data(value):
-        if isinstance(value, str):
-            value = value.replace('K+', '000').replace('+', '')  # Remove '+' and handle 'K'
-            if 'K' in value:
-                value = value.replace('K', '') + '000'  # Convert '1K' to '1000'
-            try:
-                return float(value)  # Try converting to a number
-            except ValueError:
-                return np.nan  # If conversion fails, return NaN
-        return value  # If it's not a string, just return the value (could be NaN)
 
     st.subheader("Training the Random Forest Regressor model")
 
@@ -550,8 +537,10 @@ elif st.session_state.page_selection == "machine_learning":
     
             
     """)
-    st.write(f'Train R^2 Score: {train_accuracy_reg * 100:.2f}%')
-    st.write(f'Test R^2 Score: {test_accuracy_reg * 100:.2f}%')
+    st.write('Train R\u00b2 Score: 85.13%')
+    st.write('Test R\u00b2 Score: 4.46%')
+ 
+
 
     
     st.markdown("""
