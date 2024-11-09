@@ -3,3 +3,4 @@ pandas
 altair
 plotly
 scikit-learn
+seaborn
