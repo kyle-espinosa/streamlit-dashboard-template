@@ -381,6 +381,13 @@ elif st.session_state.page_selection == "machine_learning":
    `Reference:` https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html     
                 
     """)    
+ 
+    st.write("Shape of X_train_class:", X_train_class.shape)
+    st.write("Sample of X_train_class:", X_train_class.head())
+    if isinstance(X_train_class, pd.DataFrame) or isinstance(X_train_class, np.ndarray):
+        st.write("Data is in the correct format.")
+    else:
+        st.error("X_train_class is not in a valid format.")
 
     # Imputer for handling missing values
     st.write("Handling missing values using median imputation...")
