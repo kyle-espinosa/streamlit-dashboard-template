@@ -348,4 +348,4 @@ elif st.session_state.page_selection == "conclusion":
     ##### **Summing up:**  
     This project successfully demonstrated effective data preparation, exploratory analysis, and modeling techniques on the Amazon Phone Data dataset. Both models achieved high accuracy in their respective tasks, providing insights into product sales prediction and classification.   
                 
-    """)
+    "")
