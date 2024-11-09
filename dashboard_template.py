@@ -6,6 +6,10 @@ import pandas as pd
 import altair as alt
 import plotly.express as px
 import seaborn as sns
+import numpy as np
+
+##
+from sklearn.preprocessing import MinMaxScaler
 
 ## 
 from sklearn.preprocessing import LabelEncoder
@@ -226,66 +230,14 @@ elif st.session_state.page_selection == "eda":
 elif st.session_state.page_selection == "data_cleaning":
     st.header("🧼 Data Cleaning and Data Pre-processing")
 
-    st.subheader("Original Dataset Preview")
-    st.write("Preview of the original dataset before encoding:")
-    st.write(phonesearch_df.head())  # Display the first 5 rows
+    st.subheader("Initial Dataset Preview")
+    st.write("Here’s a preview of the raw dataset:")
+    st.write(phonesearch_df.head())
     
-    # 1 Encoding categorical variables
-    st.subheader("Encoding Categorical Variables")
-
-    # Applying Label Encoding
-    encoder = LabelEncoder()
-    phonesearch_df['is_best_seller_encoded'] = encoder.fit_transform(phonesearch_df['is_best_seller'].astype(str))
-    phonesearch_df['is_amazon_choice_encoded'] = encoder.fit_transform(phonesearch_df['is_amazon_choice'].astype(str))
-
-    # Display the encoded columns
-    st.write("Encoded Data (After Label Encoding):")
-    st.write(phonesearch_df[['is_best_seller', 'is_best_seller_encoded', 'is_amazon_choice', 'is_amazon_choice_encoded']].head())
-
-    # 2 Select features and target variable for classification
-    st.subheader("Classification Task")
-    col1, col2 = st.columns(2, gap='medium')  
-    with col1:       
-        X_classification = phonesearch_df[['product_price', 'product_star_rating', 'product_num_ratings']]
-        y_classification = phonesearch_df['is_amazon_choice_encoded']
-        # Display the selected features and target variable for classification
-        st.write("Selected Features for Classification:")
-        st.write(X_classification.head())
-    with col2:
-        st.write("Target Variable for Classification:")
-        st.write(y_classification.head())
-
-    # 3 Split the dataset into training and testing sets for classification
-    st.subheader("Classification Data Split")
-    X_train_class, X_test_class, y_train_class, y_test_class = train_test_split(X_classification, y_classification, test_size=0.3, random_state=42)
-    
-    # Display 
-    st.write("Shape of the Training Set for Classification:")
-    st.write(X_train_class.shape)
-    st.write("Shape of the Test Set for Classification:")
-    st.write(X_test_class.shape)
-
-    # 4 Select features and target variable for regression
-    st.subheader("Regression Task")
-    X_regression = phonesearch_df[['product_price', 'product_star_rating', 'product_num_ratings']]
-    y_regression = phonesearch_df['sales_volume']
-    
-    # Display 
-    st.write("Selected Features for Regression:")
-    st.write(X_regression.head())
-    st.write("Target Variable for Regression:")
-    st.write(y_regression.head())
-
-    # 5 Split the dataset into training and testing sets for regression
-    st.subheader("Regression Data Split")
-    X_train_reg, X_test_reg, y_train_reg, y_test_reg = train_test_split(X_regression, y_regression, test_size=0.3, random_state=42)
-    
-    # Display 
-    st.write("Shape of the Training Set for Regression:")
-    st.write(X_train_reg.shape)
-    st.write("Shape of the Test Set for Regression:")
-    st.write(X_test_reg.shape)
-
+    # 1 Check 
+    st.subheader("Checking for Missing Values")
+    missing_values = phoneData_df.isnull().sum()
+    st.write(missing_values[missing_values > 0])
 
 # Machine Learning Page
 elif st.session_state.page_selection == "machine_learning":
