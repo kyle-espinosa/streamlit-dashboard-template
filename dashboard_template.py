@@ -236,7 +236,7 @@ elif st.session_state.page_selection == "data_cleaning":
     
     # 1 Check 
     st.subheader("Checking for Missing Values")
-    missing_values = phoneData_df.isnull().sum()
+    missing_values = phonesearch_df.isnull().sum()
     st.write(missing_values[missing_values > 0])
 
 # Machine Learning Page
