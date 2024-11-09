@@ -202,9 +202,7 @@ elif st.session_state.page_selection == "eda":
     pairwise_scatter_plot(1)
 
         
-    col = st.columns((2), gap='medium')
-
-        with col[0]:
+    
 
 # Data Cleaning Page
 elif st.session_state.page_selection == "data_cleaning":
