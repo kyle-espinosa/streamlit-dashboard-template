@@ -344,7 +344,7 @@ elif st.session_state.page_selection == "data_cleaning":
     st.write("Shape of the Test Set for Classification:")
     st.write(X_test_class.shape)
 
-    # Save to session state in preprocessing
+    # Save to session state 
     st.session_state['X_train_class'] = X_train_class
     st.session_state['X_test_class'] = X_test_class    
  
@@ -386,9 +386,11 @@ elif st.session_state.page_selection == "machine_learning":
    
     # Imputer for handling missing values
     st.write("Handling missing values using median imputation...")
-
+ 
     imputer = SimpleImputer(strategy="median")
-
+    # Access X Y
+    X_train_class = st.session_state['X_train_class']
+    X_test_class = st.session_state['X_test_class']
     # Apply the imputer to X_train_class and X_test_class
     X_train_class = imputer.fit_transform(X_train_class)
     X_test_class = imputer.transform(X_test_class)
