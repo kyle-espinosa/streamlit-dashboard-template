@@ -212,23 +212,21 @@ elif st.session_state.page_selection == "eda":
 elif st.session_state.page_selection == "data_cleaning":
     st.header("🧼 Data Cleaning and Data Pre-processing")
 
-    phonesearch_df['is_best_seller_encoded'] = phonesearch_df['is_best_seller'].astype('category').cat.codes
-    phonesearch_df['is_amazon_choice_encoded'] = phonesearch_df['is_amazon_choice'].astype('category').cat.codes
+    st.subheader("Original Dataset Preview")
+    st.write("Preview of the original dataset before encoding:")
+    st.write(phonesearch_df.head())  # Display the first 5 rows
 
-    # Display a sample of the DataFrame with the new encoded columns
-    st.subheader("Sample of Encoded Data")
+    # Encoding categorical variables
+    st.subheader("Encoding Categorical Variables")
+
+    # Applying Label Encoding
+    encoder = LabelEncoder()
+    phonesearch_df['is_best_seller_encoded'] = encoder.fit_transform(phonesearch_df['is_best_seller'].astype(str))
+    phonesearch_df['is_amazon_choice_encoded'] = encoder.fit_transform(phonesearch_df['is_amazon_choice'].astype(str))
+
+    # Display the encoded columns
+    st.write("Encoded Data (After Label Encoding):")
     st.write(phonesearch_df[['is_best_seller', 'is_best_seller_encoded', 'is_amazon_choice', 'is_amazon_choice_encoded']].head())
-
-    # Show value counts for each encoded column
-    st.subheader("Value Counts of Encoded Columns")
-    best_seller_counts = phonesearch_df['is_best_seller_encoded'].value_counts()
-    amazon_choice_counts = phonesearch_df['is_amazon_choice_encoded'].value_counts()
-
-    st.write("**Best Seller Encoded Value Counts**")
-    st.bar_chart(best_seller_counts)
-
-    st.write("**Amazon Choice Encoded Value Counts**")
-    st.bar_chart(amazon_choice_counts)
 
 
 
