@@ -232,6 +232,11 @@ elif st.session_state.page_selection == "data_cleaning":
     X_classification = phonesearch_df[['product_price', 'product_star_rating', 'product_num_ratings']]
     y_classification = phonesearch_df['is_amazon_choice_encoded']
 
+    # Display the selected features and target variable for classification
+    st.write("Selected Features for Classification:")
+    st.write(X_classification.head())
+    st.write("Target Variable for Classification:")
+    st.write(y_classification.head())
 
 
 
