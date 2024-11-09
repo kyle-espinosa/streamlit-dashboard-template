@@ -254,7 +254,6 @@ elif st.session_state.page_selection == "data_cleaning":
     st.subheader("Cleaning and Converting Currency Columns")
     st.code("""
 
-    # Remove currency symbols and convert columns to numeric type
     phoneData_df['product_price'] = pd.to_numeric(phoneData_df['product_price'].str.replace('[\$,]', '', regex=True))
     phoneData_df['product_original_price'] = pd.to_numeric(phoneData_df['product_original_price'].str.replace('[\$,]', '', regex=True)) 
             
@@ -267,7 +266,6 @@ elif st.session_state.page_selection == "data_cleaning":
     st.subheader("Filling Missing Values")
     st.code("""
 
-    # Replace missing values using median directly
     phoneData_df['product_price'] = phoneData_df['product_price'].fillna(phoneData_df['product_price'].median())
     phoneData_df['product_original_price'] = phoneData_df['product_original_price'].fillna(phoneData_df['product_original_price'].median())                  
             
@@ -335,7 +333,9 @@ elif st.session_state.page_selection == "data_cleaning":
     with col2:
         st.write("Target Variable for Classification:")
         st.write(y_classification.head())
-
+    # Define x y 
+    X_classification = phonesearch_df.drop(columns=['product_price', 'product_star_rating', 'product_num_ratings'])  
+    y_classification = phonesearch_df['is_amazon_choice_encoded']
     # 3 Split the dataset into training and testing sets for classification
     st.subheader("Classification Data Split")
     X_train_class, X_test_class, y_train_class, y_test_class = train_test_split(X_classification, y_classification, test_size=0.3, random_state=42)
