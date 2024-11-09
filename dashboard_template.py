@@ -344,16 +344,9 @@ elif st.session_state.page_selection == "data_cleaning":
     st.write("Shape of the Test Set for Classification:")
     st.write(X_test_class.shape)
 
-    # Imputer for handling missing values
-    st.write("Handling missing values using median imputation...")
-
-    imputer = SimpleImputer(strategy="median")
-
-    # Apply the imputer to X_train_class and X_test_class
-    X_train_class = imputer.fit_transform(X_train_class)
-    X_test_class = imputer.transform(X_test_class)
-
-    st.write("Imputation Complete!")
+    # Save to session state in preprocessing
+    st.session_state['X_train_class'] = X_train_class
+    st.session_state['X_test_class'] = X_test_class    
  
     # 4 Select features and target variable for regression
     st.subheader("Regression Task")
@@ -391,9 +384,17 @@ elif st.session_state.page_selection == "machine_learning":
                 
     """)  
    
+    # Imputer for handling missing values
+    st.write("Handling missing values using median imputation...")
 
-    
-    
+    imputer = SimpleImputer(strategy="median")
+
+    # Apply the imputer to X_train_class and X_test_class
+    X_train_class = imputer.fit_transform(X_train_class)
+    X_test_class = imputer.transform(X_test_class)
+
+    st.write("Imputation Complete!")
+       
 
     st.subheader("Training the Logistic Regression model")
 
