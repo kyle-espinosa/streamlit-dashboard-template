@@ -251,7 +251,26 @@ elif st.session_state.page_selection == "data_cleaning":
     st.write("Shape of the Test Set for Classification:")
     st.write(X_test_class.shape)
 
+    # 4 Select features and target variable for regression
+    st.subheader("Regression Task")
+    X_regression = phoneData_df[['product_price', 'product_star_rating', 'product_num_ratings']]
+    y_regression = phoneData_df['sales_volume']
+    
+    # Display 
+    st.write("Selected Features for Regression:")
+    st.write(X_regression.head())
+    st.write("Target Variable for Regression:")
+    st.write(y_regression.head())
 
+    # 5 Split the dataset into training and testing sets for regression
+    st.subheader("Regression Data Split")
+    X_train_reg, X_test_reg, y_train_reg, y_test_reg = train_test_split(X_regression, y_regression, test_size=0.3, random_state=42)
+    
+    # Display 
+    st.write("Shape of the Training Set for Regression:")
+    st.write(X_train_reg.shape)
+    st.write("Shape of the Test Set for Regression:")
+    st.write(X_test_reg.shape)
 
 
 # Machine Learning Page
