@@ -339,7 +339,7 @@ elif st.session_state.page_selection == "conclusion":
     #### 3. 📈 **Model Performance (Decision Tree Classifier)**:
 
     - The **Logistic Regression model** achieved high accuracy in predicting whether a product was designated as **"Amazon Choice."** This simple yet effective model was a good fit for the classification task.
-    - The `confusion matrix` and `classification report` further illustrated the model’s effectiveness in classifying the products accurately based on the provided features.
+    - The confusion matrix and classification report further illustrated the model’s effectiveness in classifying the products accurately based on the provided features.
     
     #### 4. 📈 **Model Performance (Random Forest Regressor)**:
     - The **Random Forest Regressor** was trained to predict product sales volume, achieving a high R² score on both the training and testing data.
