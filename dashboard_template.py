@@ -253,8 +253,8 @@ elif st.session_state.page_selection == "data_cleaning":
 
     # 4 Select features and target variable for regression
     st.subheader("Regression Task")
-    X_regression = phoneData_df[['product_price', 'product_star_rating', 'product_num_ratings']]
-    y_regression = phoneData_df['sales_volume']
+    X_regression = phonesearch_df[['product_price', 'product_star_rating', 'product_num_ratings']]
+    y_regression = phonesearch_df['sales_volume']
     
     # Display 
     st.write("Selected Features for Regression:")
