@@ -379,7 +379,10 @@ elif st.session_state.page_selection == "machine_learning":
    `Reference:` https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html     
                 
     """)  
- 
+    X_train_class, X_test_class, y_train_class, y_test_class = train_test_split(
+        X_classification, y_classification, test_size=0.3, random_state=42
+    )
+
     # Imputer for handling missing values
     st.write("Handling missing values using median imputation...")
 
