@@ -408,6 +408,12 @@ elif st.session_state.page_selection == "data_cleaning":
     st.write("Shape of the Test Set for Regression:")
     st.write(X_test_reg.shape)
 
+    # Save the training and testing datasets to session state
+    st.session_state['X_train_reg_rf'] = X_train_reg_rf
+    st.session_state['X_test_reg_rf'] = X_test_reg_rf
+    st.session_state['y_train_reg_rf'] = y_train_reg_rf
+    st.session_state['y_test_reg_rf'] = y_test_reg_rf
+
 # Machine Learning Page
 elif st.session_state.page_selection == "machine_learning":
     st.header("🤖 Machine Learning")
@@ -495,7 +501,13 @@ elif st.session_state.page_selection == "machine_learning":
 
     `Reference:` https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html         
                 
-    """)  
+    """) 
+    # Access X and y data for Random Forest regression from session state
+    X_train_reg_rf = st.session_state['X_train_reg_rf']
+    X_test_reg_rf = st.session_state['X_test_reg_rf']
+    y_train_reg_rf = st.session_state['y_train_reg_rf']
+    y_test_reg_rf = st.session_state['y_test_reg_rf']
+
     # 1. Data Preprocessing for y_train_reg and y_test_reg
     def extract_numeric(value):
         if isinstance(value, str):
