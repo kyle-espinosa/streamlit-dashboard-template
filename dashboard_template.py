@@ -394,10 +394,17 @@ elif st.session_state.page_selection == "machine_learning":
     # Apply the imputer to X_train_class and X_test_class
     X_train_class = imputer.fit_transform(X_train_class)
     X_test_class = imputer.transform(X_test_class)
+    st.code("""
 
+    # Initialize the imputer to replace NaN values with the median of each column
+    imputer = SimpleImputer(strategy="median")
+
+    # Apply the imputer to X_train_class and X_test_class
+    X_train_class = imputer.fit_transform(X_train_class)
+    X_test_class = imputer.transform(X_test_class)        
+    """)
     st.write("Imputation Complete!")
        
-
     st.subheader("Training the Logistic Regression model")
 
     st.code("""
@@ -425,6 +432,10 @@ elif st.session_state.page_selection == "machine_learning":
     """)
 
     st.subheader("Classification Report")
+    classification_report_text = classification_report(y_test_class, y_pred_class)
+   
+    # Display the classification report 
+    st.text(f"\nClassification Report:\n{classification_report_text}")
  
     st.subheader("Random Forest")
     st.markdown("""
