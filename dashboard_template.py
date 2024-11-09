@@ -146,7 +146,19 @@ def feature_importance_plot(feature_importance_df, width, height, key):
 if st.session_state.page_selection == "about":
     st.header("ℹ️ About")
 
-    # Your content for the ABOUT page goes here
+    st.markdown(""" 
+
+    A Streamlit web application that performs **Exploratory Data Analysis (EDA)**, **Data Preprocessing**, and **Supervised Machine Learning** to predict "Amazon Choice" products and sales volume from the Phone Search Dataset using **Logistic Regression** and **Random Forest Regressor**.
+
+    #### Pages
+    1. `Dataset` - A brief description of the Phone Search Dataset used in this dashboard.
+    2. `EDA` - Exploratory Data Analysis of the Phone Search Dataset. Highlighting the distribution of features like product price, star rating, and reviews. Includes visualizations such as histograms, scatter plots, and pairwise scatter plot matrix.
+    3. `Data Cleaning / Pre-processing` - Data cleaning and pre-processing steps including encoding categorical variables, handling missing values, and splitting the dataset into training and testing sets for classification and regression tasks.
+    4. `Machine Learning` - Training two supervised models: Logistic Regression for classification of "Amazon Choice" products and Random Forest Regressor for sales volume prediction. Includes model evaluation, feature importance analysis, and tree plot for Random Forest.
+    5. `Prediction` - A page where users can input values to predict whether a product is "Amazon Choice" or estimate the sales volume using the trained models.
+    6. `Conclusion` - Summary of the insights and observations from the EDA and model training.
+
+    """)
    
 
 # Dataset Page
