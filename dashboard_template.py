@@ -342,7 +342,7 @@ elif st.session_state.page_selection == "conclusion":
     - The confusion matrix and classification report further illustrated the "model’s" effectiveness in classifying the products accurately based on the provided features.
     
     #### 4. 📈 **Model Performance (Random Forest Regressor)**:
-    - The **Random Forest Regressor** was trained to predict product sales volume, achieving a high R² score on both the training and testing data.
+    - The **Random Forest Regressor** was trained to predict product sales volume, achieving a high "R²" score on both the training and testing data.
     - Feature importance analysis identified `product_price` and `product_star_rating` as the most influential features for predicting sales volume, highlighting how customer preferences may affect sales.
 
     ##### **Summing up:**  
