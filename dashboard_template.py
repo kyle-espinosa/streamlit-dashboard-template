@@ -380,27 +380,9 @@ elif st.session_state.page_selection == "machine_learning":
 
    `Reference:` https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html     
                 
-    """)   
-    @st.cache_data
-    def load_and_split_data():
-     # Load data and split
-     X_classification = phonesearch_df[['product_price', 'product_star_rating', 'product_num_ratings']]
-     y_classification = phonesearch_df['is_amazon_choice_encoded']
-     return train_test_split(X_classification, y_classification, test_size=0.3, random_state=42)
-
-    # Call this function
-    X_train_class, X_test_class, y_train_class, y_test_class = load_and_split_data()
+    """)  
  
-    # Imputer for handling missing values
-    st.write("Handling missing values using median imputation...")
-
-    imputer = SimpleImputer(strategy="median")
-
-    # Apply the imputer to X_train_class and X_test_class
-    X_train_class = imputer.fit_transform(X_train_class)
-    X_test_class = imputer.transform(X_test_class)
     
-    st.write("Imputation Complete!")
 
     st.subheader("Training the Logistic Regression model")
 
