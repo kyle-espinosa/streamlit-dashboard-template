@@ -121,6 +121,35 @@ def pairwise_scatter_plot(key):
 
     st.plotly_chart(scatter_matrix, use_container_width=True, key=f"pairwise_scatter_plot_{key}")
 
+def confusion_matrix_plot(y_true, y_pred, labels, width, height, key):
+    # Generate confusion matrix
+    cm = confusion_matrix(y_true, y_pred, labels=labels)
+    
+    # Create a dataframe from the confusion matrix for better visualization
+    cm_df = pd.DataFrame(cm, index=labels, columns=labels)
+    
+    # Create the heatmap
+    fig = ff.create_annotated_heatmap(
+        z=cm_df.values,
+        x=labels,
+        y=labels,
+        colorscale='Blues',
+        zmin=0, zmax=cm_df.values.max(), 
+        hoverinfo='z', text=cm_df.values
+    )
+    
+    # Adjust the layout of the plot
+    fig.update_layout(
+        title="Confusion Matrix",
+        xaxis=dict(title='Predicted Label'),
+        yaxis=dict(title='True Label'),
+        width=width,
+        height=height
+    )
+    
+    st.plotly_chart(fig, use_container_width=True, key=f"confusion_matrix_{key}")
+
+
 def feature_importance_plot(feature_importance_df, width, height, key):
     # Generate a bar plot for feature importances
     feature_importance_fig = px.bar(
@@ -444,18 +473,7 @@ elif st.session_state.page_selection == "machine_learning":
     st.text(f"\nClassification Report:\n{classification_report_text}")
  
     # Confusion Matrix Visualization
-    st.subheader("Confusion Matrix")
-    conf_matrix = confusion_matrix(y_test_class, y_pred_class)
-    
-    # Plot confusion matrix using seaborn heatmap
-    fig, ax = plt.subplots(figsize=(6, 4))
-    sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues', xticklabels=['Not Amazon Choice', 'Amazon Choice'], yticklabels=['Not Amazon Choice', 'Amazon Choice'])
-    plt.xlabel("Predicted")
-    plt.ylabel("Actual")
-    plt.title("Confusion Matrix for Logistic Regression")
-    
-    # Show the plot in Streamlit
-    st.pyplot(fig)
+    confusion_matrix_plot(y_true, y_pred, labels=['Class 0', 'Class 1'], width=600, height=600, key='example')
  
     st.subheader("Random Forest")
     st.markdown("""
