@@ -17,6 +17,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.impute import SimpleImputer
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.tree import plot_tree
+import re
 
 #######################
 # Page configuration
@@ -493,6 +496,19 @@ elif st.session_state.page_selection == "machine_learning":
     `Reference:` https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html         
                 
     """)  
+    # 1. Data Preprocessing for y_train_reg and y_test_reg
+    def extract_numeric(value):
+        if isinstance(value, str):
+            numbers = re.findall(r'\d+', value)
+            if numbers:
+                return int(numbers[0])
+            else:
+                return np.nan
+        return value
+    
+    # Apply to y_train_reg and y_test_reg
+    y_train_reg = y_train_reg.apply(extract_numeric).fillna(y_train_reg.median())
+    y_test_reg = y_test_reg.apply(extract_numeric).fillna(y_test_reg.median())
 
     st.subheader("Training the Random Forest Regressor model")
 
@@ -522,9 +538,8 @@ elif st.session_state.page_selection == "machine_learning":
     
             
     """)
-
-    st.write("Train R\u00b2 Score: 85.13%")
-    st.write("Test R\u00b2 Score: 4.46%")
+    st.write(f'Train R^2 Score: {train_accuracy_reg * 100:.2f}%')
+    st.write(f'Test R^2 Score: {test_accuracy_reg * 100:.2f}%')
 
     
     st.markdown("""
@@ -532,6 +547,7 @@ elif st.session_state.page_selection == "machine_learning":
     The Random Forest Regressor was trained to predict sales volume. An R² score of X% indicates how well the model explains the variance in sales volume, suggesting that the features used are relevant predictors.
      
     """)
+
 
     
     
