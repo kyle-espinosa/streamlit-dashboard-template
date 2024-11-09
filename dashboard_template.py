@@ -266,6 +266,15 @@ elif st.session_state.page_selection == "machine_learning":
 
     st.write("Accuracy: 98.95%")
     
+    st.markdown("""
+
+    This implements Logistic Regression for classification. It first imputes any remaining missing values in the training and test datasets using the median. The model is then fitted on the training data, predictions are made on the test set, and the accuracy of the model is calculated and printed.
+     
+    """)
+    
+    st.subheader("Classification Report")
+    classification_report_text = classification_report(y_test_class, y_pred_class)
+    st.text(classification_report_text)
 
 # Prediction Page
 elif st.session_state.page_selection == "prediction":
