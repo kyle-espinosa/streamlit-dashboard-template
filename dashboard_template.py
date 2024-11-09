@@ -239,6 +239,43 @@ elif st.session_state.page_selection == "data_cleaning":
     missing_values = phonesearch_df.isnull().sum()
     st.write(missing_values[missing_values > 0])
 
+    # 2 Dropping Irrelevant Columns
+    st.subheader("Dropping Irrelevant Columns")
+    irrelevant_columns = ['product_url', 'product_photo']
+    phonesearch_df = phonesearch_df.drop(columns=irrelevant_columns)
+    st.write("Dropped columns:", irrelevant_columns)
+
+    # 3 Cleaning and Converting Currency Columns
+    st.subheader("Cleaning and Converting Currency Columns")
+    phonesearch_df['product_price'] = pd.to_numeric(phonesearch_df['product_price'].str.replace('[\$,]', '', regex=True))
+    phonesearch_df['product_original_price'] = pd.to_numeric(phonesearch_df['product_original_price'].str.replace('[\$,]', '', regex=True))
+    st.write("Converted columns `product_price` and `product_original_price` to numeric.")
+    
+    # 4 Filling Missing Values with Median
+    st.subheader("Filling Missing Values")
+    phonesearch_df['product_price'] = phonesearch_df['product_price'].fillna(phonesearch_df['product_price'].median())
+    phonesearch_df['product_original_price'] = phonesearch_df['product_original_price'].fillna(phonesearch_df['product_original_price'].median())
+    st.write("Filled missing values with the median for `product_price` and `product_original_price`.")
+    
+    # 5 Outlier Removal in Product Price
+    st.subheader("Outlier Removal in Product Price")
+    Q1 = phonesearch_df['product_price'].quantile(0.25)
+    Q3 = phonesearch_df['product_price'].quantile(0.75)
+    IQR = Q3 - Q1
+    phonesearch_df = phonesearch_df[(phonesearch_df['product_price'] >= (Q1 - 1.5 * IQR)) & (phonesearch_df['product_price'] <= (Q3 + 1.5 * IQR))]
+    st.write("Removed outliers based on the IQR method.")
+    
+    # 6 Normalizing Columns
+    st.subheader("Normalizing Columns")
+    scaler = MinMaxScaler()
+    phonesearch_df[['product_price', 'product_star_rating']] = scaler.fit_transform(phonesearch_df[['product_price', 'product_star_rating']])
+    st.write("Normalized columns `product_price` and `product_star_rating`.")
+    
+    # Final preview
+    st.subheader("Processed Dataset Preview")
+    st.write("Here’s a preview of the processed dataset:")
+    st.write(phonesearch_df.head())
+
 # Machine Learning Page
 elif st.session_state.page_selection == "machine_learning":
     st.header("🤖 Machine Learning")
