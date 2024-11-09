@@ -325,7 +325,7 @@ elif st.session_state.page_selection == "prediction":
 elif st.session_state.page_selection == "conclusion":
     st.header("📝 Conclusion")
 
-    st.markdown(""
+    st.markdown("""
     Through exploratory data analysis and training of two classification models (`Logistic Regression and Random Forest Regressor`) on the **Amazon Phone Data dataset**, the key insights and observations are:
 
     #### 1. 📊 **Dataset Characteristics**:
@@ -348,4 +348,4 @@ elif st.session_state.page_selection == "conclusion":
     ##### **Summing up:**  
     This project successfully demonstrated effective data preparation, exploratory analysis, and modeling techniques on the Amazon Phone Data dataset. Both models achieved high accuracy in their respective tasks, providing insights into product sales prediction and classification.   
                 
-    "")
+    """)
