@@ -1,6 +1,6 @@
 # Predicting Sales and Classifying Data using Streamlit
 
-A Streamlit web application that performs **Exploratory Data Analysis (EDA)**, **Data Pre-processing**, and two supervised classification models: **Logistic Regression** and **Random Forest Regression** to make predictions on sales volume and classification on new unseen data.
+A Streamlit web application that performs **Exploratory Data Analysis (EDA)**, **Data Pre-processing**, and two supervised classification models: **Logistic Regression** and **Random Forest Regressor** to make predictions on sales volume and classification on new unseen data.
 
 ![Main Page Screenshot](screenshots/main_page_screenshot.png)
 
@@ -23,11 +23,13 @@ A Streamlit web application that performs **Exploratory Data Analysis (EDA)**, *
 ### 📖 Pages:
 
 1. `Dataset` - Brief description of the Iris Flower dataset used in this dashboard.
-2. `EDA` - Exploratory Data Analysis of the Iris Flower dataset. Highlighting the distribution of Iris species and the relationship between the features. Includes graphs such as Pie Chart, Scatter Plots, and Pairwise Scatter Plot Matrix.
-3. `Data Cleaning / Pre-processing` - Data cleaning and pre-processing steps such as encoding the species column and splitting the dataset into training and testing sets.
-4. `Machine Learning` - Training two supervised classification models: Decision Tree Classifier and Random Forest Regressor. Includes model evaluation, feature importance, and tree plot.
-5. `Prediction` - Prediction page where users can input values to predict the Iris species using the trained models.
-6. `Conclusion` - Summary of the insights and observations from the EDA and model training.
+2. `EDA` - Exploratory Data Analysis of the Amazon Phone Prices, Ratings & Sales dataset. Highlighting the distribution of Iris species and the relationship between the features. Includes graphs such as Pie Chart, Scatter Plots, and Pairwise Scatter Plot Matrix.
+
+   Histogram, Scatter Plot, Pairwise Scatter Plot, and Confusion Matrix. bar plot
+4. `Data Cleaning / Pre-processing` - Data cleaning and pre-processing steps such as encoding the species column and splitting the dataset into training and testing sets.
+5. `Machine Learning` - Training two supervised classification models: Logistic Regression and Random Forest Regressor. Includes model evaluation, feature importance, and tree plot.
+6. `Prediction` - Prediction page where users can input values to predict the Iris species using the trained models.
+7. `Conclusion` - Summary of the insights and observations from the EDA and model training.
 
 ### 💡 Findings / Insights
 
