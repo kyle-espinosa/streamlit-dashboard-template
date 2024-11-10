@@ -492,15 +492,17 @@ elif st.session_state.page_selection == "machine_learning":
  
     st.subheader("Random Forest")
     st.markdown("""
+
     **Random Forest Regressor** is a machine learning algorithm that is used to predict continuous values by *combining multiple decision trees* which is called `"Forest"` wherein each tree is trained independently on different random subset of data and features.
 
-    This process begins with data **splitting** wherein the algorithm selects various random subsets of both the data points and the features to create diverse decision trees.  
+    This process begins with data **splitting** wherein the algorithm selects various random subsets of both the data points and the features to create diverse decision trees.  
 
     Each tree is then trained separately to make predictions based on its unique subset. When it's time to make a final prediction each tree in the forest gives its own result and the Random Forest algorithm averages these predictions.
 
-    `Reference:` https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html         
-    """)
-
+    `Reference:` https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html         
+                
+    """) 
+    
     # Access X and y data for Random Forest regression from session state
     X_train_reg = st.session_state['X_train_reg']
     X_test_reg = st.session_state['X_test_reg']
@@ -519,8 +521,8 @@ elif st.session_state.page_selection == "machine_learning":
     rfr_model.fit(X_train_reg, y_train_reg)
     """)
 
-    st.subheader("Model Evaluation")
 
+    st.subheader("Model Evaluation")
     st.code("""
     train_accuracy = rfr_model.score(X_train_reg, y_train_reg)  # Train data R^2 score
     test_accuracy = rfr_model.score(X_test_reg, y_test_reg)    # Test data R^2 score
