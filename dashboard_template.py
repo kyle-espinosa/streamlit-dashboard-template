@@ -418,99 +418,104 @@ elif st.session_state.page_selection == "data_cleaning":
 elif st.session_state.page_selection == "machine_learning":
     st.header("🤖 Machine Learning")
 
-    # Logistic Regression
-    st.subheader("Logistic Regression")
-    st.markdown("""
-    **Logistic Regression** is a statistical method for binary classification, predicting the probability that an input belongs to a category. It uses the logistic function to model the outcome. Predictions above 0.5 are classified as 1, while predictions below 0.5 are classified as 0.
+    # Reload the dataset to ensure phoneData_df is available in this page
+    phoneData_df = load_data()
 
-    [Scikit-learn Documentation](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html)
-    """)
+    # Verify that the 'is_amazon_choice' column exists before proceeding
+    if 'is_amazon_choice' in phoneData_df.columns:
+        
+        # Logistic Regression
+        st.subheader("Logistic Regression")
+        st.markdown("""
+        **Logistic Regression** is a statistical method for binary classification, predicting the probability that an input belongs to a category. It uses the logistic function to model the outcome. Predictions above 0.5 are classified as 1, while predictions below 0.5 are classified as 0.
 
-    # Prepare the classification dataset
-    # Apply label encoding to 'is_amazon_choice' column
-    encoder = LabelEncoder()
-    phoneData_df['is_amazon_choice_encoded'] = encoder.fit_transform(phoneData_df['is_amazon_choice'].astype(str))
-    X_classification = phoneData_df[['product_price', 'product_star_rating', 'product_num_ratings']]
-    y_classification = phoneData_df['is_amazon_choice_encoded']
+        [Scikit-learn Documentation](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html)
+        """)
 
-    # Split the dataset
-    X_train_class, X_test_class, y_train_class, y_test_class = train_test_split(X_classification, y_classification, test_size=0.3, random_state=42)
+        # Apply label encoding to 'is_amazon_choice' column
+        encoder = LabelEncoder()
+        phoneData_df['is_amazon_choice_encoded'] = encoder.fit_transform(phoneData_df['is_amazon_choice'].astype(str))
+        X_classification = phoneData_df[['product_price', 'product_star_rating', 'product_num_ratings']]
+        y_classification = phoneData_df['is_amazon_choice_encoded']
 
-    # Handle missing values in the classification dataset
-    imputer = SimpleImputer(strategy="median")
-    X_train_class = imputer.fit_transform(X_train_class)
-    X_test_class = imputer.transform(X_test_class)
+        # Split the dataset
+        X_train_class, X_test_class, y_train_class, y_test_class = train_test_split(X_classification, y_classification, test_size=0.3, random_state=42)
+
+        # Handle missing values in the classification dataset
+        imputer = SimpleImputer(strategy="median")
+        X_train_class = imputer.fit_transform(X_train_class)
+        X_test_class = imputer.transform(X_test_class)
+        
+        # Train the Logistic Regression model
+        log_reg_model = LogisticRegression(random_state=42, max_iter=1000)
+        log_reg_model.fit(X_train_class, y_train_class)
+
+        # Make predictions and calculate accuracy
+        y_pred_class = log_reg_model.predict(X_test_class)
+        accuracy_class = accuracy_score(y_test_class, y_pred_class)
+        
+        # Display results
+        st.write("**Logistic Regression Accuracy**:", f"{accuracy_class * 100:.2f}%")
+        st.markdown("This Logistic Regression model predicts the 'Amazon Choice' status with the above accuracy.")
+        
+        st.subheader("Classification Report")
+        classification_report_text = classification_report(y_test_class, y_pred_class)
+        st.text(classification_report_text)
+
+        # Confusion Matrix
+        st.subheader("Confusion Matrix")
+        conf_matrix = confusion_matrix(y_test_class, y_pred_class)
+        fig1 = px.imshow(conf_matrix, text_auto=True, labels=dict(x="Predicted", y="Actual"))
+        fig1.update_layout(title="Confusion Matrix for Logistic Regression")
+        st.plotly_chart(fig1)
+
+        # Random Forest Regressor
+        st.subheader("Random Forest Regressor")
+        st.markdown("""
+        **Random Forest Regressor** is an ensemble learning method for regression tasks. It uses multiple decision trees, each trained on random subsets of the data, and averages their outputs for prediction.
+
+        [Scikit-learn Documentation](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html)
+        """)
+
+        # Prepare the regression dataset
+        X_regression = phoneData_df[['product_price', 'product_star_rating', 'product_num_ratings']]
+        y_regression = phoneData_df['sales_volume']
+
+        # Split the dataset
+        X_train_reg, X_test_reg, y_train_reg, y_test_reg = train_test_split(X_regression, y_regression, test_size=0.3, random_state=42)
+
+        # Apply missing value imputation for regression target variable
+        def extract_numeric(value):
+            if isinstance(value, str):
+                numbers = re.findall(r'\d+', value)
+                return int(numbers[0]) if numbers else np.nan
+            return value
+
+        y_train_reg = y_train_reg.apply(extract_numeric).fillna(y_train_reg.median())
+        y_test_reg = y_test_reg.apply(extract_numeric).fillna(y_test_reg.median())
+
+        # Train the Random Forest Regressor
+        rfr_model = RandomForestRegressor(random_state=42)
+        rfr_model.fit(X_train_reg, y_train_reg)
+
+        # Evaluate the Random Forest Regressor
+        train_accuracy_reg = rfr_model.score(X_train_reg, y_train_reg)
+        test_accuracy_reg = rfr_model.score(X_test_reg, y_test_reg)
+
+        st.write(f"**Train R² Score**: {train_accuracy_reg * 100:.2f}%")
+        st.write(f"**Test R² Score**: {test_accuracy_reg * 100:.2f}%")
+        st.markdown("This R² score indicates how well the model explains the variance in sales volume based on input features.")
+
+        # Feature Importance
+        st.subheader("Feature Importance")
+        feature_importance = pd.Series(rfr_model.feature_importances_, index=X_train_reg.columns)
+        fig2 = px.bar(feature_importance, orientation='h', labels={'index': 'Features', 'value': 'Importance Score'})
+        fig2.update_layout(title="Feature Importance in Random Forest Regressor")
+        st.plotly_chart(fig2)
     
-    # Train the Logistic Regression model
-    log_reg_model = LogisticRegression(random_state=42, max_iter=1000)
-    log_reg_model.fit(X_train_class, y_train_class)
+    else:
+        st.error("The 'is_amazon_choice' column is missing from the dataset. Please check your data.")
 
-    # Make predictions and calculate accuracy
-    y_pred_class = log_reg_model.predict(X_test_class)
-    accuracy_class = accuracy_score(y_test_class, y_pred_class)
-    
-    # Display results
-    st.write("**Logistic Regression Accuracy**:", f"{accuracy_class * 100:.2f}%")
-    st.markdown("This Logistic Regression model predicts the 'Amazon Choice' status with the above accuracy.")
-    
-    st.subheader("Classification Report")
-    classification_report_text = classification_report(y_test_class, y_pred_class)
-    st.text(classification_report_text)
-
-    # Confusion Matrix
-    st.subheader("Confusion Matrix")
-    conf_matrix = confusion_matrix(y_test_class, y_pred_class)
-    fig1 = px.imshow(conf_matrix, text_auto=True, labels=dict(x="Predicted", y="Actual"))
-    fig1.update_layout(title="Confusion Matrix for Logistic Regression")
-    st.plotly_chart(fig1)
-
-    # Random Forest Regressor
-    st.subheader("Random Forest Regressor")
-    st.markdown("""
-    **Random Forest Regressor** is an ensemble learning method for regression tasks. It uses multiple decision trees, each trained on random subsets of the data, and averages their outputs for prediction.
-
-    [Scikit-learn Documentation](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html)
-    """)
-
-    # Prepare the regression dataset
-    X_regression = phoneData_df[['product_price', 'product_star_rating', 'product_num_ratings']]
-    y_regression = phoneData_df['sales_volume']
-
-    # Split the dataset
-    X_train_reg, X_test_reg, y_train_reg, y_test_reg = train_test_split(X_regression, y_regression, test_size=0.3, random_state=42)
-
-    # Apply missing value imputation for regression target variable
-    def extract_numeric(value):
-        if isinstance(value, str):
-            numbers = re.findall(r'\d+', value)
-            return int(numbers[0]) if numbers else np.nan
-        return value
-
-    y_train_reg = y_train_reg.apply(extract_numeric).fillna(y_train_reg.median())
-    y_test_reg = y_test_reg.apply(extract_numeric).fillna(y_test_reg.median())
-
-    # Train the Random Forest Regressor
-    rfr_model = RandomForestRegressor(random_state=42)
-    rfr_model.fit(X_train_reg, y_train_reg)
-
-    # Evaluate the Random Forest Regressor
-    train_accuracy_reg = rfr_model.score(X_train_reg, y_train_reg)
-    test_accuracy_reg = rfr_model.score(X_test_reg, y_test_reg)
-
-    st.write(f"**Train R² Score**: {train_accuracy_reg * 100:.2f}%")
-    st.write(f"**Test R² Score**: {test_accuracy_reg * 100:.2f}%")
-    st.markdown("This R² score indicates how well the model explains the variance in sales volume based on input features.")
-
-    # Feature Importance
-    st.subheader("Feature Importance")
-    feature_importance = pd.Series(rfr_model.feature_importances_, index=X_train_reg.columns)
-    fig2 = px.bar(feature_importance, orientation='h', labels={'index': 'Features', 'value': 'Importance Score'})
-    fig2.update_layout(title="Feature Importance in Random Forest Regressor")
-    st.plotly_chart(fig2)
-
-
-    
-    
     
 
 # Prediction Page
