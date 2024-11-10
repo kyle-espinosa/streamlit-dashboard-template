@@ -24,7 +24,7 @@ import re
 #######################
 # Page configuration
 st.set_page_config(
-    page_title="Dashboard Template", # Replace this with your Project's Title
+    page_title="Amazon Phone Data Dashboard", # Replace this with your Project's Title
     page_icon="assets/icon.png", # You may replace this with a custom icon or emoji related to your project
     layout="wide",
     initial_sidebar_state="expanded")
@@ -492,62 +492,53 @@ elif st.session_state.page_selection == "machine_learning":
  
     st.subheader("Random Forest")
     st.markdown("""
-
+    
     **Random Forest Regressor** is a machine learning algorithm that is used to predict continuous values by *combining multiple decision trees* which is called `"Forest"` wherein each tree is trained independently on different random subset of data and features.
-
+    
     This process begins with data **splitting** wherein the algorithm selects various random subsets of both the data points and the features to create diverse decision trees.  
-
+    
     Each tree is then trained separately to make predictions based on its unique subset. When it's time to make a final prediction each tree in the forest gives its own result and the Random Forest algorithm averages these predictions.
-
+    
     `Reference:` https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html         
                 
-    """) 
+    """)
+    
     # Access X and y data for Random Forest regression from session state
     X_train_reg = st.session_state['X_train_reg']
     X_test_reg = st.session_state['X_test_reg']
     y_train_reg = st.session_state['y_train_reg']
     y_test_reg = st.session_state['y_test_reg']
-
-
+    
+    # Clean y_train_reg and y_test_reg by filling NaN values with the median
+    y_train_reg = y_train_reg.fillna(y_train_reg.median())
+    y_test_reg = y_test_reg.fillna(y_test_reg.median())
+    
     st.subheader("Training the Random Forest Regressor model")
     rfr_model = RandomForestRegressor(random_state=42)  # Model definition
     rfr_model.fit(X_train_reg, y_train_reg)
+    
     st.code("""
-
+    
     rfr_model = RandomForestRegressor(random_state=42)
     rfr_model.fit(X_train_reg, y_train_reg)   
             
     """)
-
-    st.subheader("Model Evaluation")
-
-    st.code("""
-    train_accuracy = rfr_model.score(X_train_reg, y_train_reg)  # Train data R^2 score
-    test_accuracy = rfr_model.score(X_test_reg, y_test_reg)    # Test data R^2 score
-    # Apply the extract_numeric function to clean y_test_reg
-    y_test_reg = y_test_reg.apply(extract_numeric)
-
-    # Fill any remaining NaN values in y_test_reg with the median
-    y_test_reg = y_test_reg.fillna(y_test_reg.median())
-
-    # Evaluate the model
-    train_accuracy_reg = rfr_model.score(X_train_reg, y_train_reg)  # Train data
-    test_accuracy_reg = rfr_model.score(X_test_reg, y_test_reg)      # Test data
-
-    print(f'Train R^2 Score: {train_accuracy_reg * 100:.2f}%')
-    print(f'Test R^2 Score: {test_accuracy_reg * 100:.2f}%')
     
-            
-    """)
-    st.write('Train R\u00b2 Score: 85.13%')
-    st.write('Test R\u00b2 Score: 4.46%')
-
+    st.subheader("Model Evaluation")
+    
+    # Calculate R^2 scores for train and test data
+    train_accuracy_reg = rfr_model.score(X_train_reg, y_train_reg)  # Train data
+    test_accuracy_reg = rfr_model.score(X_test_reg, y_test_reg)     # Test data
+    
+    st.write(f'Train R\u00b2 Score: {train_accuracy_reg * 100:.2f}%')
+    st.write(f'Test R\u00b2 Score: {test_accuracy_reg * 100:.2f}%')
+    
     st.markdown("""
-
+    
     The Random Forest Regressor was trained to predict sales volume. An R² score of X% indicates how well the model explains the variance in sales volume, suggesting that the features used are relevant predictors.
      
     """)
-
+    
     # Feature Importance
     feature_importance = pd.Series(rfr_model.feature_importances_, index=X_train_reg.columns)
     
