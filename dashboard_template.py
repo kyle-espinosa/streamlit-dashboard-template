@@ -429,10 +429,11 @@ elif st.session_state.page_selection == "machine_learning":
                 
     """)    
     # Access X and y data from session state
-    X_train_class = st.session_state['X_train_class']
-    X_test_class = st.session_state['X_test_class']
-    y_train_class = st.session_state['y_train_class']
-    y_test_class = st.session_state['y_test_class']
+    X_train_class = st.session_state.get['X_train_class']
+    X_test_class = st.session_state.get['X_test_class']
+    y_train_class = st.session_state.get['y_train_class']
+    y_test_class = st.session_state.get['y_test_class']
+
     # Imputer for handling missing values
     st.write("Handling missing values using median imputation...")
     
